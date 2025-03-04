@@ -1,8 +1,9 @@
-// internal/repository/database.go
 package repository
 
 import (
 	"fmt"
+	"go-gin/internal/config"
+	"go-gin/internal/model"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -10,26 +11,26 @@ import (
 	"time"
 )
 
-var DB *gorm.DB
-
-func InitDB() {
-	cfg := config.LoadDatabaseConfig()
+func InitDB(cfg *config.DatabaseConfig, logger *zap.Logger) (*gorm.DB, error) {
 
 	dsn := buildDSN(cfg)
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-		Logger: NewGormLogger(), // 自定义日志集成Zap
-	})
+	db, err := gorm.Open(mysql.Open(dsn))
 
 	if err != nil {
-		zap.L().Fatal("数据库连接失败",
-			zap.String("dsn", maskPassword(dsn)),
-			zap.Error(err))
+		logger.Fatal("数据库连接失败")
+		logger.Fatal("dsn" + maskPassword(dsn))
+		logger.Fatal(err.Error())
 	}
 
-	setupConnectionPool(db, cfg)
+	if err := db.AutoMigrate(&model.User{}, &model.Message{}); err != nil {
+		logger.Error("自动建表失败", zap.Error(err))
+		return nil, err
+	}
 
-	DB = db
+	setupConnectionPool(db, cfg, logger)
+
+	return db, nil
 }
 
 func buildDSN(cfg *config.DatabaseConfig) string {
@@ -43,10 +44,10 @@ func buildDSN(cfg *config.DatabaseConfig) string {
 		cfg.ParseTime)
 }
 
-func setupConnectionPool(db *gorm.DB, cfg *config.DatabaseConfig) {
+func setupConnectionPool(db *gorm.DB, cfg *config.DatabaseConfig, logger *zap.Logger) {
 	sqlDB, err := db.DB()
 	if err != nil {
-		zap.L().Fatal("获取数据库实例失败", zap.Error(err))
+		zap.L().Fatal("获取数据库实例失败"+err.Error(), zap.String("db", cfg.Name))
 	}
 
 	// 连接池设置
