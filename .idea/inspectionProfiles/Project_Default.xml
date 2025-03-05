@@ -5,6 +5,9 @@
       <functions>
         <function importPath="gorm.io/gorm" name="Open" />
       </functions>
+      <methods>
+        <method importPath="gorm.io/gorm" receiver="*DB" name="DB" />
+      </methods>
     </inspection_tool>
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">

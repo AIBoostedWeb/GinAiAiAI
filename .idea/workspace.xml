@@ -4,30 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45b51b64-e074-40e7-85d5-763b955e0b5b" name="Changes" comment="new">
-      <change afterPath="$PROJECT_DIR$/API/apitest.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/openAPI/api.yaml" afterDir="false" />
+    <list default="true" id="45b51b64-e074-40e7-85d5-763b955e0b5b" name="Changes" comment="finish">
+      <change afterPath="$PROJECT_DIR$/internal/service/aiService_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/go-gin/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/go-gin/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/initConfig.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/initConfig.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/engine/initEngine.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/engine/initEngine.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/engine/registerRoutes.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/engine/registerRoutes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/session.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/model/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/session.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/middleware/gin_auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/middleware/gin_auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/middleware/gin_zap.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/middleware/gin_zap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/middleware/gin_zap_recovery.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/middleware/gin_zap_recovery.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/util/jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/util/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/util/logger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/util/path.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/util/path.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/pkg/util/retry.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/util/retry.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repository/initDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repository/initDB.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/aiService.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/aiService.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,14 +20,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="OpenAPI" />
         <option value="HTTP Request" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
   <component name="GOROOT" url="file:///usr/lib/go" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HttpClientSelectedEnvironments">
@@ -83,7 +71,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ai-chater-sp",
     "go.import.settings.migrated": "true",
     "last_opened_file_path": "/home/mia",
     "node.js.detected.package.eslint": "true",
@@ -115,7 +103,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build go-gin/cmd/go-gin">
+  <component name="RunManager" selected="HTTP Request.apitest | conv_id is optional ,json should instead of form">
     <configuration name="go build go-gin/cmd/go-gin" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gogo-gin-dev" />
       <working_directory value="$PROJECT_DIR$" />
@@ -139,8 +127,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build go-gin/cmd/go-gin" />
         <item itemvalue="HTTP Request.apitest | conv_id is optional ,json should instead of form" />
+        <item itemvalue="Go Build.go build go-gin/cmd/go-gin" />
         <item itemvalue="HTTP Request.apitest | #7" />
         <item itemvalue="HTTP Request.apitest | #6" />
         <item itemvalue="HTTP Request.apitest | #4" />
@@ -175,7 +163,9 @@
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
     <MESSAGE value="new" />
-    <option name="LAST_COMMIT_MESSAGE" value="new" />
+    <MESSAGE value="finsh" />
+    <MESSAGE value="finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -185,23 +175,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/handler/message.go</url>
-          <line>63</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/handler/message.go</url>
-          <line>65</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/handler/message.go</url>
-          <line>107</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/handler/message.go</url>
-          <line>108</line>
-          <option name="timeStamp" value="19" />
+          <line>171</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

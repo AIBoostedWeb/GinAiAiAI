@@ -74,6 +74,7 @@ func GenHandleMessage(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 		//----------------------------
+		history, _ := getMessageInPages(db, c, msg.SenderID, msg.ConvID, 10, 1)
 
 		//----------------------------
 		c.JSON(http.StatusOK, gin.H{"message_id": msg.MessageID})
@@ -136,4 +137,34 @@ func GenPullMessage(db *gorm.DB) gin.HandlerFunc {
 			"size":  params.PageSize,
 		})
 	}
+}
+
+func getMessageInPages(db *gorm.DB, c *gin.Context, userId uint64, convId uint64, pageSize int, page int) (*[]model.Message, int64) {
+	var results []model.Message // 替换为实际模型
+	query := db.Model(&model.Message{})
+
+	// 添加过滤条件
+	if userId > 0 {
+		query = query.Where("sender_id = ?", userId)
+	}
+	if convId > 0 { // 新增ConvID过滤
+		query = query.Where("conv_id = ?", convId)
+	}
+
+	// 4. 执行分页查询[2](@ref)
+	var total int64
+	err := query.Count(&total).Error
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.Abort()
+		return nil, nil
+	}
+
+	offset := (page - 1) * pageSize
+	if err := query.Offset(offset).Limit(pageSize).Find(&results).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.Abort()
+		return nil, nil
+	}
+	return &results, total
 }
