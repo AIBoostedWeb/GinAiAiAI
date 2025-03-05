@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="45b51b64-e074-40e7-85d5-763b955e0b5b" name="Changes" comment="finish">
-      <change afterPath="$PROJECT_DIR$/internal/service/aiService_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/service/aiService.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/service/aiService.go" afterDir="false" />
-    </list>
+    <list default="true" id="45b51b64-e074-40e7-85d5-763b955e0b5b" name="Changes" comment="aiService begin" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +158,8 @@
     <MESSAGE value="new" />
     <MESSAGE value="finsh" />
     <MESSAGE value="finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish" />
+    <MESSAGE value="aiService begin" />
+    <option name="LAST_COMMIT_MESSAGE" value="aiService begin" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -175,7 +169,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/handler/message.go</url>
-          <line>171</line>
+          <line>169</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
