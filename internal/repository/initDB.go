@@ -23,7 +23,7 @@ func InitDB(cfg *config.DatabaseConfig, logger *zap.Logger) (*gorm.DB, error) {
 		logger.Fatal(err.Error())
 	}
 
-	if err := db.AutoMigrate(&model.User{}, &model.Message{}); err != nil {
+	if err := db.AutoMigrate(&model.User{}, &model.Message{}, &model.Conversation{}); err != nil {
 		logger.Error("自动建表失败", zap.Error(err))
 		return nil, err
 	}
@@ -34,7 +34,7 @@ func InitDB(cfg *config.DatabaseConfig, logger *zap.Logger) (*gorm.DB, error) {
 }
 
 func buildDSN(cfg *config.DatabaseConfig) string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=%t&loc=Local",
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=%t&loc=Local",
 		cfg.Username,
 		cfg.Password,
 		cfg.Host,

@@ -12,10 +12,10 @@ type DatabaseConfig struct {
 	Port            string `mapstructure:"port"`
 	Name            string `mapstructure:"name"`
 	Charset         string `mapstructure:"charset"`
-	ParseTime       bool   `mapstructure:"parseTime"`
-	MaxOpenConns    int    `mapstructure:"maxOpenConns"`
-	MaxIdleConns    int    `mapstructure:"maxIdleConns"`
-	ConnMaxLifetime string `mapstructure:"connMaxLifetime"`
+	ParseTime       bool   `mapstructure:"parse_time"`
+	MaxOpenConns    int    `mapstructure:"max_open_conns"`
+	MaxIdleConns    int    `mapstructure:"max_idle_conns"`
+	ConnMaxLifetime string `mapstructure:"conn_max_lifetime"`
 }
 
 type GlobalConfig struct {

@@ -1,0 +1,3 @@
+{
+  "error": "Error 1054 (42S22): Unknown column 'user_id' in 'where clause'"
+}

@@ -1,0 +1,11 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYwMjI5fQ.xsyJVW5e3DNPakJ0CBBJuKRVu5vwLMSMiBBHI7pPxEk",
+  "user": {
+    "user_id": 0,
+    "username": "kiramira",
+    "password_hash": "qwq233383",
+    "Messages": null,
+    "CreatedAt": "0001-01-01T00:00:00Z",
+    "UpdatedAt": "0001-01-01T00:00:00Z"
+  }
+}

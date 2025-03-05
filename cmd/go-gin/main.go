@@ -8,14 +8,14 @@ import (
 	"go-gin/internal/config"
 	"go-gin/internal/engine"
 	"go-gin/internal/repository"
+	util2 "go-gin/pkg/util"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
-
-	"go-gin/internal/pkg/util"
 )
 
 func main() {
@@ -28,23 +28,26 @@ func main() {
 
 	var db *gorm.DB
 
-	wd, err = util.FindProjectRoot("go.mod")
+	wd, err = util2.FindProjectRoot("go.mod")
+	wd = filepath.Join(wd, "configs")
 	if err != nil {
 		panic(err)
 	}
 
-	err = config.InitConf(wd, "config", "yaml")
+	err = config.InitConf(wd, "config", "yaml", &CONFIG)
 	if err != nil {
+		print(err.Error())
 		panic(err)
 	}
 
-	logger, err = util.InitLogger(CONFIG.Global.RunMode)
+	logger, err = util2.InitLogger(CONFIG.Global.RunMode)
 
 	if err != nil {
 		err_list = append(err_list, err.Error())
 		for _, errInfo := range err_list {
 			print(errInfo)
 		}
+		print(err.Error())
 		panic(err)
 
 	}

@@ -13,7 +13,7 @@ func (err *InitConfigError) Error() string {
 	return fmt.Sprintf("InitConfigError: %s", err.initError.Error())
 }
 
-func InitConf(pathToConf string, configName string, configType string) error {
+func InitConf(pathToConf string, configName string, configType string, CONFIG *Config) error {
 	viper.AddConfigPath(pathToConf)
 	viper.SetConfigName(configName)
 	viper.SetConfigType(configType)
@@ -26,6 +26,7 @@ func InitConf(pathToConf string, configName string, configType string) error {
 	}
 
 	err = viper.Unmarshal(&CONFIG)
+
 	if err != nil {
 		return err
 	}

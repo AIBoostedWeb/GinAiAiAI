@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-gin/internal/config"
 	"go-gin/internal/handler"
-	"go-gin/internal/pkg/middleware"
+	"go-gin/pkg/middleware"
 	"gorm.io/gorm"
 )
 
@@ -12,6 +12,7 @@ func RegisterRoutes(cfg *config.ServiceConfig, serverConfig *config.ServerConfig
 
 	public := r.Group("/")
 	{
+
 		public.POST("/login", handler.GenLogin(db, cfg.JWTSecret, serverConfig))
 		public.POST("/register", handler.GenRegister(db))
 	}
@@ -24,14 +25,15 @@ func RegisterRoutes(cfg *config.ServiceConfig, serverConfig *config.ServerConfig
 		user := protected.Group("/user")
 		// user.GET("/", handler.GetUserProfile) // 动态路由参数设计[7](@ref)
 		// user.PUT("/", handler.UpdateProfile)
-		user.POST("/logout", handler.GenLogout(db))
+		user.POST("/logout", handler.GenLogout(db, serverConfig.Host))
 
 		session := protected.Group("/session")
-		session.POST("/", handler.GenSession(db))
-		session.GET("/", handler.GenGetSession(db))
+		session.POST("/", handler.GenNewSession(db))
+		session.GET("/", handler.GenGetSessions(db))
 
 		sms := protected.Group("/message")
-		sms.POST("/", handle.GenReciveMessage(db))
+		sms.POST("/", handler.GenHandleMessage(db))
+		sms.GET("/", handler.GenPullMessage(db))
 
 	}
 

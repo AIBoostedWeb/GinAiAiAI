@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gin/internal/pkg/util"
+	"go-gin/pkg/util"
 	"net/http"
 	"strings"
 )
@@ -12,9 +12,15 @@ func JWTAuth(secret []byte) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 1. 从 Header 中提取 Token
 		authHeader := c.GetHeader("Authorization")
+
 		if authHeader == "" {
-			abortWithError(c, http.StatusUnauthorized, "缺失认证令牌")
-			return
+			var err error
+			authHeader, err = c.Cookie("token")
+			if err != nil || authHeader == "" {
+				abortWithError(c, http.StatusUnauthorized, "缺失认证令牌")
+				return
+			}
+
 		}
 
 		// 2. 验证 Token 格式

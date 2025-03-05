@@ -7,12 +7,12 @@ import (
 )
 
 type CustomClaims struct {
-	UserID   uint   `json:"user_id"`
+	UserID   uint64 `json:"user_id"`
 	Username string `json:"username"`
 	jwt.RegisteredClaims
 }
 
-func GenerateToken(jwtSecret []byte, userID uint, username string) (string, error) {
+func GenerateToken(jwtSecret []byte, userID uint64, username string) (string, error) {
 	claims := CustomClaims{
 		UserID:   userID,
 		Username: username,

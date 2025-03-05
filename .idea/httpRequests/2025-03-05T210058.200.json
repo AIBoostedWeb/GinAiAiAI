@@ -1,0 +1,17 @@
+{
+  "list": [
+    {
+      "conv_id": 1,
+      "conv_type": 1,
+      "title": "new session",
+      "owner_id": 1,
+      "members": null,
+      "created_at": "2025-03-05T20:49:24.134+08:00",
+      "updated_at": "2025-03-05T20:49:24.134+08:00",
+      "deleted_at": null
+    }
+  ],
+  "page": 1,
+  "size": 20,
+  "total": 1
+}

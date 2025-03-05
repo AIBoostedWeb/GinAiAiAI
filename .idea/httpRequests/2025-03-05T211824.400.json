@@ -1,0 +1,3 @@
+{
+  "error": "Key: 'QueryParams.UserID' Error:Field validation for 'UserID' failed on the 'required' tag\nKey: 'QueryParams.ConvID' Error:Field validation for 'ConvID' failed on the 'required' tag"
+}

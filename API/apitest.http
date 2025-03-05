@@ -1,0 +1,74 @@
+### GET request to example server
+POST localhost:1234/register
+Content-Type: application/json
+
+{
+  "username": "kiramira",
+  "password_hash": "qwq233383"
+}
+###
+POST localhost:1234/login
+Content-Type: application/json
+
+{
+  "username": "kiramira",
+  "password_hash": "qwq233383"
+
+}
+
+###
+POST localhost:1234/api/v1/user/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+
+
+###
+POST localhost:1234/api/v1/session
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+
+{
+  "conv_type": 1,
+  "owner_id": 1
+}
+
+###
+GET localhost:1234/api/v1/session
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+
+{
+  "page": 1,
+  "page_size": 5,
+  "user_id": 1
+}
+
+###
+POST localhost:1234/api/v1/message
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+
+{
+
+  "sender_id": 1,
+  "content": "hello, world! ",
+  "msg_type": 1,
+  "conv_id": 1,
+  "receiver_type": 1
+}
+
+### conv_id is optional ,json should instead of form
+GET localhost:1234/api/v1/message
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+
+{
+  "page": 1,
+  "page_size": 5,
+  "user_id": 1,
+  "conv_id": 1
+}
+
+###
+
+

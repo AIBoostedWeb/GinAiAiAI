@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-gin/internal/config"
 	"go-gin/internal/model"
-	"go-gin/internal/pkg/util"
+	"go-gin/pkg/util"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"net/http"
@@ -56,7 +56,7 @@ func GenRegister(db *gorm.DB) gin.HandlerFunc {
 		c.JSON(http.StatusCreated, gin.H{
 			"code":    http.StatusCreated,
 			"message": "注册成功",
-			"data":    gin.H{"user_id": user.ID}, // 返回用户ID更符合规范
+			"data":    gin.H{"user_id": user.UserID}, // 返回用户ID更符合规范
 		})
 	}
 }
@@ -69,31 +69,31 @@ func GenLogin(db *gorm.DB, jwtSecret string, cfg *config.ServerConfig) gin.Handl
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		}
 
-		if err := db.Where("Username = ?", user.Username).First(&user).Error; err != nil {
+		if err := db.Where("Username = ?", user.Username).First(&userInfo).Error; err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"error": "用户不存在"})
 			return
 		}
 
-		if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(user.PasswordHash)); err != nil {
+		if err := bcrypt.CompareHashAndPassword([]byte(userInfo.PasswordHash), []byte(user.PasswordHash)); err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "密码错误"})
 			return
 		}
 
 		// 4. 生成 JWT Token（示例）
-		token, err := util.GenerateToken([]byte(jwtSecret), userInfo.ID, userInfo.Username)
+		token, err := util.GenerateToken([]byte(jwtSecret), userInfo.UserID, userInfo.Username)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "could not generate token"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"token": token, "user": user})
-		c.SetCookie("token", token, -1, "/", cfg.Host, false, true)
+		c.JSON(http.StatusOK, gin.H{"token": token, "user_id": userInfo.UserID})
+		c.SetCookie("token", token, 2400000, "/", cfg.Host, false, true)
 
 	}
 }
 
-func GenLogout(db *gorm.DB) gin.HandlerFunc {
+func GenLogout(db *gorm.DB, domain string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.SetCookie("token", "", -1, "/", "yourdomain.com", false, true)
+		c.SetCookie("token", "", -1, "/", domain, false, true)
 
 		// 可选：清理服务端会话（如Redis中的Token记录）
 		// redisClient.Del(c, "user_session:"+userID)

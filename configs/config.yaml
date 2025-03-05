@@ -1,0 +1,18 @@
+global:
+  run_mode: "debug"
+server:
+  port: 1234
+  host: "127.0.0.1"
+service:
+  jwt_secret: "qwq233383"
+database:
+  username: "root"
+  password: "qwq233383"
+  host: "127.0.0.1"
+  port: "3306"
+  name: "my_database"
+  charset: "utf8mb4"
+  parse_time: true
+  max_open_conns: 5
+  max_idle_conns: 3
+  conn_max_lifetime: 30
