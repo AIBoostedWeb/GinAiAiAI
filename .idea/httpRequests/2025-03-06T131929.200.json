@@ -1,0 +1,29 @@
+{
+  "list": [
+    {
+      "message_id": 3,
+      "sender_id": 1,
+      "content": "hello, world! ",
+      "response_content": "",
+      "msg_type": 1,
+      "receiver_type": 1,
+      "send_time": "2025-03-05T21:06:41.531+08:00",
+      "conv_id": 1,
+      "deleted_at": null
+    },
+    {
+      "message_id": 4,
+      "sender_id": 1,
+      "content": "以下是一个简单的bash脚本示例，用于备份个人文件夹到外部硬盘，并每天检查备份的完整性。如果备份文件损坏，它会尝试发送邮件通知。\n\n首先，确保你已经安装了`rsync`来同步文件，以及`mail`命令来发送邮件。大多数Linux发行版都预装了这些工具。\n\n```bash\n#!/bin/bash\n\n# 定义变量\nBACKUP_DIR=\"/path/to/your/personal/folder\" # 个人文件夹路径\nBACKUP_LOCATION",
+      "response_content": "",
+      "msg_type": 1,
+      "receiver_type": 1,
+      "send_time": "2025-03-06T13:09:18.188+08:00",
+      "conv_id": 1,
+      "deleted_at": null
+    }
+  ],
+  "page": 1,
+  "size": 5,
+  "total": 2
+}
