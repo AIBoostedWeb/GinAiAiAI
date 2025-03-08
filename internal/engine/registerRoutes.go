@@ -32,7 +32,7 @@ func RegisterRoutes(cfg *config.ServiceConfig, serverConfig *config.ServerConfig
 		session.GET("/", handler.GenGetSessions(db))
 
 		sms := protected.Group("/message")
-		sms.POST("/", handler.GenHandleMessage(db))
+		sms.POST("/", handler.GenHandleMessage(db, &serverConfig.AI))
 		sms.GET("/", handler.GenPullMessage(db))
 
 	}

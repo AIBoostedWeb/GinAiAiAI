@@ -19,13 +19,12 @@ Content-Type: application/json
 ###
 POST localhost:1234/api/v1/user/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
-
+Authorization: Bearer {{auth_key}}
 
 ###
 POST localhost:1234/api/v1/session
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+Authorization: Bearer {{auth_key}}
 
 {
   "conv_type": 1,
@@ -35,7 +34,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c
 ###
 GET localhost:1234/api/v1/session
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+Authorization: Bearer {{auth_key}}
 
 {
   "page": 1,
@@ -44,14 +43,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c
 }
 
 ###
-POST localhost:1234/api/v1/message
+POST http://localhost:1234/api/v1/message
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+Authorization: Bearer {{auth_key}}
 
 {
 
   "sender_id": 1,
-  "content": "hello, world! ",
+  "content": "一键启动所有hadoop集群",
   "msg_type": 1,
   "conv_id": 1,
   "receiver_type": 1
@@ -60,7 +59,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c
 ### conv_id is optional ,json should instead of form
 GET localhost:1234/api/v1/message
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImtpcmFtaXJhIiwiaXNzIjoibXktYXBwIiwiZXhwIjoxNzQxMjYxMzEwfQ.w3Um-9q-dMdBkmnj24QfS1ytLNANa_hPUeKtLt3paG8
+Authorization: Bearer {{auth_key}}
 
 {
   "page": 1,

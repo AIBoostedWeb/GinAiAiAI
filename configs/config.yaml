@@ -3,6 +3,10 @@ global:
 server:
   port: 1234
   host: "127.0.0.1"
+  ai:
+    auth_key: "527037bcdc464a0fa29c033098dff2d4.XOxDSqgyiBEK0qm0"
+    base_url: "https://open.bigmodel.cn/api/paas/v4/"
+    model: "GLM-4-Flash"
 service:
   jwt_secret: "qwq233383"
 database:

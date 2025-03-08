@@ -21,7 +21,7 @@ func ZapRecovery(logger *zap.Logger) gin.HandlerFunc {
 				// 返回 500 响应
 				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 					"code":    500,
-					"message": "Internal Server Error",
+					"message": "Internal Server Error, caught by zap recovery!",
 				})
 			}
 		}()

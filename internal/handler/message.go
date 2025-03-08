@@ -2,22 +2,51 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-gin/internal/config"
 	"go-gin/internal/model"
+	"go-gin/internal/service"
 	"gorm.io/gorm"
 	"net/http"
 	"time"
 )
 
-func GenHandleMessage(db *gorm.DB) gin.HandlerFunc {
+func GenHandleMessage(db *gorm.DB, aiCfg *config.AIConfig) gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		var messageParams model.Message
+		var response string
 		if err := c.ShouldBindJSON(&messageParams); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+		//------------ AIGC ----------------
+		history, _ := getMessageInPages(db, c, messageParams.SenderID, messageParams.ConvID, 10, 1)
+		chatContext := append(*history, messageParams)
+
+		requestPrompt, i := service.AskAiWithMessage(aiCfg, &chatContext, service.PROMPT)
+		if i != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": i.Error()})
+			return
+		}
+		var err error
+		var midResponse string
+		midResponse, err = service.AskAIWithStr(aiCfg, requestPrompt, service.GENERATE)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		response, err = service.AskAIWithStr(aiCfg, "根据"+response+"检查ai生成内容:\n\n"+response+"\n\n如果有问题就改正，然后不分析，将bash脚本传出，并去掉多余的符号。", service.CHECK)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		//(*history)[len(*history)-1].ResponseContent = response
+		//----------------------------
+
 		//----------if no conv_id and receiver_id raise error
-		//--------------------------------------------------------
+		//------------------ tx begin --------------------------------------
 		// 改进后的代码
 		tx := db.Begin()
 		if tx.Error != nil {
@@ -32,14 +61,16 @@ func GenHandleMessage(db *gorm.DB) gin.HandlerFunc {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "系统异常"})
 			}
 		}()
+
 		timeNow := time.Now()
 		msg := model.Message{
-			SenderID:     messageParams.SenderID,
-			Content:      messageParams.Content,
-			MsgType:      messageParams.MsgType,
-			ConvID:       messageParams.ConvID,
-			ReceiverType: messageParams.ReceiverType,
-			SendTime:     timeNow,
+			SenderID:        messageParams.SenderID,
+			Content:         messageParams.Content,
+			MsgType:         messageParams.MsgType,
+			ConvID:          messageParams.ConvID,
+			ReceiverType:    messageParams.ReceiverType,
+			SendTime:        timeNow,
+			ResponseContent: response,
 		}
 
 		// 群聊消息验证（带错误检查）
@@ -73,11 +104,8 @@ func GenHandleMessage(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "事务提交失败"})
 			return
 		}
-		//----------------------------
-		history, _ := getMessageInPages(db, c, msg.SenderID, msg.ConvID, 10, 1)
 
-		//----------------------------
-		c.JSON(http.StatusOK, gin.H{"message_id": msg.MessageID})
+		c.JSON(http.StatusOK, gin.H{"message_id": msg.MessageID, "question": messageParams.Content, "prompt": requestPrompt, "midRes": midResponse, "message": response})
 	}
 }
 
@@ -157,14 +185,14 @@ func getMessageInPages(db *gorm.DB, c *gin.Context, userId uint64, convId uint64
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		c.Abort()
-		return nil, nil
+		return nil, -1
 	}
 
 	offset := (page - 1) * pageSize
 	if err := query.Offset(offset).Limit(pageSize).Find(&results).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		c.Abort()
-		return nil, nil
+		return nil, -1
 	}
 	return &results, total
 }

@@ -5,6 +5,7 @@ go 1.24
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/sashabaranov/go-openai v1.38.0
 	github.com/spf13/viper v1.19.0
 	go.uber.org/zap v1.21.0
 	golang.org/x/crypto v0.23.0

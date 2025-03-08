@@ -1,8 +1,9 @@
 package config
 
 type ServerConfig struct {
-	Port string `mapstructure:"port"`
-	Host string `mapstructure:"host"`
+	Port string   `mapstructure:"port"`
+	Host string   `mapstructure:"host"`
+	AI   AIConfig `mapstructure:"ai"`
 }
 
 type DatabaseConfig struct {
@@ -24,6 +25,11 @@ type GlobalConfig struct {
 
 type ServiceConfig struct {
 	JWTSecret string `mapstructure:"jwt_secret"`
+}
+type AIConfig struct {
+	AuthKey string `mapstructure:"auth_key"`
+	BaseURL string `mapstructure:"base_url"`
+	Model   string `mapstructure:"model"`
 }
 type Config struct {
 	Global   GlobalConfig   `mapstructure:"global"`
